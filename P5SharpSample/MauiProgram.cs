@@ -14,7 +14,7 @@ namespace P5SharpSample
                 .UseMauiApp<App>()                 
                 .UseP5Sharp(new P5SharpConfig
                 {
-                     IP = "x.x.x.x",
+                     IP = "192.168.0.7",
                      Port = 12345,
                   //  ProjectPath = @"C:\Users\YourUser\Documents\P5SharpSample",
                     //LocalTPCServer = false

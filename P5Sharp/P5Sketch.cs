@@ -97,7 +97,7 @@ namespace P5Sharp
                 });
 
 
-#if DEBUG 
+
                 if (_hotReloadInDebug)
                 {
 
@@ -125,7 +125,7 @@ namespace P5Sharp
                     }
 
                 }
-#endif
+
 
 
             });
