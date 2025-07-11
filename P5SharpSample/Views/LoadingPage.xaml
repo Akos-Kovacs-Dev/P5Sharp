@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P5SharpSample.Views.LoadingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
+    xmlns:sketches="clr-namespace:P5SharpSample.Animations.LoadingAnimations"
+    Title="LoadingPage">
+    <VerticalStackLayout VerticalOptions="Center">
+        <p5:P5SketchView
+            EnableTouchEvents="True"
+            FilesCsv="Animations/PurpleRain/ButtonAnimations/Load1Sketch.cs"
+            FrameRate="60"
+            HeightRequest="100"
+            HotReloadInDebug="True"
+            ReDrawOnSizeChanged="True"
+            WidthRequest="200">
+            <p5:P5SketchView.Sketch>
+                <sketches:Load1Sketch />
+            </p5:P5SketchView.Sketch>
+        </p5:P5SketchView>
+
+        <p5:P5SketchView
+            EnableTouchEvents="True"
+            FilesCsv="Animations/PurpleRain/ButtonAnimations/Load2Sketch.cs"
+            FrameRate="60"
+            HeightRequest="100"
+            HotReloadInDebug="True"
+            ReDrawOnSizeChanged="True"
+            WidthRequest="100">
+            <p5:P5SketchView.Sketch>
+                <sketches:Load2Sketch />
+            </p5:P5SketchView.Sketch>
+        </p5:P5SketchView>
+    </VerticalStackLayout>
+</ContentPage>

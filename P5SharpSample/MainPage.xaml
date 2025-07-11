@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P5SharpSample.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttonketches="clr-namespace:P5SharpSample.Animations.ButtonAnimations"
+    xmlns:loadingketches="clr-namespace:P5SharpSample.Animations.LoadingAnimations"
+    xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+    xmlns:vm="clr-namespace:P5SharpSample.ViewModels">
+
+    <ContentPage.Content>
+
+        <!--  needs update  -->
+        <ScrollView IsVisible="false">
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="🎨 P5Sharp Usage Guide" />
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="🛠️ Getting Started" />
+                <Label Text="1. Install the P5Sharp NuGet package into your .NET MAUI project." />
+                <Label Text="2. For iOS/Android hot reload, install the P5SharpSync Visual Studio extension." />
+                <Label FontAttributes="Bold" Text="3. In MauiProgram.cs, add the following:" />
+                <Frame Padding="10" BackgroundColor="#F0F0F0">
+                    <Label
+                        FontFamily="Courier New"
+                        FontSize="13"
+                        LineBreakMode="CharacterWrap">
+                        <![CDATA[
+builder
+    .UseMauiApp<App>()
+    .UseP5Sharp();
+                    ]]>
+                    </Label>
+                </Frame>
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="🧱 Using &lt;P5SketchView&gt;" />
+                <Label FontAttributes="Bold" Text="Add P5SketchView to your XAML layout like this:" />
+                <Frame Padding="10" BackgroundColor="#F0F0F0">
+                    <Label
+                        FontFamily="Courier New"
+                        FontSize="13"
+                        LineBreakMode="CharacterWrap">
+                        <![CDATA[
+<p5:P5SketchView
+    EnableTouchEvents="True"
+    FilesCsv="Animations/PurpleRain/ButtonAnimations/Button1Sketch.cs"
+    FrameRate="60"
+    HeightRequest="100"
+    WidthRequest="200"
+    HotReloadInDebug="True"
+    IPAddress="192.168.0.7"
+    Port="12345"
+    LocalTPCServer="True"
+    ProjectPath="C:\Path\To\Project"
+    ReDrawOnSizeChanged="True">
+    <p5:P5SketchView.Sketch>
+        <sketches:Button1Sketch />
+    </p5:P5SketchView.Sketch>
+</p5:P5SketchView>
+                    ]]>
+                    </Label>
+                </Frame>
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="🚀 Hot Reload Info" />
+                <Label FontAttributes="Bold" Text="🪟 For Windows:" />
+                <Label Text="• Use NuGet only." />
+                <Label Text="• Set IPAddress, Port, and FilesCsv." />
+                <Label Text="• Use LocalTPCServer='True'." />
+
+                <Label FontAttributes="Bold" Text="📱 For iOS  &amp; Android:" />
+                <Label Text="• Install P5SharpSync VS Extension." />
+                <Label Text="• Set LocalTPCServer='False'." />
+                <Label Text="• IP/Port not required; FilesCsv still needed." />
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="✏️ Sample Sketch Class" />
+                <Frame Padding="10" BackgroundColor="#F0F0F0">
+                    <Label
+                        FontFamily="Courier New"
+                        FontSize="13"
+                        LineBreakMode="CharacterWrap">
+                        <![CDATA[
+public class Button1Sketch : P5Sketch
+{
+    public override void Setup()
+    {
+        Size(200, 100);
+        Background(255);
+    }
+
+    public override void Draw()
+    {
+        Fill(0);
+        Ellipse(Width / 2, Height / 2, 50, 50);
+    }
+}
+                    ]]>
+                    </Label>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+
+</ContentPage>

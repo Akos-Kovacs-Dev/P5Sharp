@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="P5SharpSample.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:P5SharpSample"
+    xmlns:views="clr-namespace:P5SharpSample.Views"
+    Title="P5SharpSample"
+    Shell.FlyoutBehavior="Flyout">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Purple Rain"
+        ContentTemplate="{DataTemplate views:PurpleRainPage}"
+        Route="PurpleRainPage" />
+
+
+    <ShellContent
+        Title="Buttons"
+        ContentTemplate="{DataTemplate views:ButtonsPage}"
+        Route="Buttons" />
+
+    <ShellContent
+        Title="Loading"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="Loading" />
+
+    <ShellContent
+        Title="Game Of Life"
+        ContentTemplate="{DataTemplate views:GameOfLifePage}"
+        Route="AnimationsPage" />
+
+    <ShellContent
+        Title="Matrix"
+        ContentTemplate="{DataTemplate views:MatrixPage}"
+        Route="MatrixPage" />
+
+
+
+
+
+</Shell>

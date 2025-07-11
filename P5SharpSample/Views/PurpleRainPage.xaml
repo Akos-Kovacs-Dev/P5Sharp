@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P5SharpSample.Views.PurpleRainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
+    xmlns:sketches="clr-namespace:P5SharpSample.Animations.PurpleRain"
+    Title="Purple Rain">
+
+    <p5:P5SketchView
+        x:Name="GameOfLifeP5View"
+        EnableTouchEvents="True"
+        FilesCsv="Animations/PurpleRain/PurpleRainSketch.cs"
+        FrameRate="60"
+        HotReloadInDebug="True"
+        ReDrawOnSizeChanged="True">
+        <p5:P5SketchView.Sketch>
+            <sketches:PurpleRainSketch />
+        </p5:P5SketchView.Sketch>
+    </p5:P5SketchView>
+</ContentPage>

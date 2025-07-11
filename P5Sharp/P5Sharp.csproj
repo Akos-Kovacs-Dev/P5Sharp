@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Authors>AkosKovacs</Authors>
+		<Copyright>MIT</Copyright>
+		<PackageIcon>p5sharpicon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Akos-Kovacs-Dev/P5Sharp</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>P5Sharp; Maui; iOS; Android; Windows</PackageTags>
+		<PackageLicenseFile>License.txt</PackageLicenseFile>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<Version>1.0.2</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\..\Desktop\License.txt">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\..\Downloads\p5sharpicon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\GitHub\P5Sharp\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
+		<PackageReference Include="Svg.Skia" Version="3.0.3" />
+	</ItemGroup>
+
+	<!-- Include AndroidManifest.xml in buildTransitive folder -->
+	<ItemGroup>
+		<None Update="buildTransitive\AndroidManifest.xml">
+			<Pack>true</Pack>
+			<PackagePath>buildTransitive\AndroidManifest.xml</PackagePath>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<!-- Include targets file to auto-merge manifest -->
+	<ItemGroup>
+		<None Update="buildTransitive\P5Sharp.Maui.targets">
+			<Pack>true</Pack>
+			<PackagePath>build\P5Sharp.targets</PackagePath>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+ 
+
+</Project>
