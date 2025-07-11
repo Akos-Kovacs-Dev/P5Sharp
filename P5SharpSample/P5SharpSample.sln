@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P5SharpSample", "P5SharpSample.csproj", "{C4994048-7813-47A7-99CD-DE8FDD00B683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P5Sharp", "..\P5SharpSketch\P5Sharp.csproj", "{729DF491-9793-E316-137A-69333D08EC0A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,10 +17,6 @@ Global
 		{C4994048-7813-47A7-99CD-DE8FDD00B683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4994048-7813-47A7-99CD-DE8FDD00B683}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4994048-7813-47A7-99CD-DE8FDD00B683}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{729DF491-9793-E316-137A-69333D08EC0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{729DF491-9793-E316-137A-69333D08EC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{729DF491-9793-E316-137A-69333D08EC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{729DF491-9793-E316-137A-69333D08EC0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
