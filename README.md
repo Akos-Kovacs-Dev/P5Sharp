@@ -88,7 +88,7 @@ Faster Development on Windows (Optional):
 
 Use the local TPC server for faster reloads and no sync extension needed:
 
-builder.Services.AddSingleton(new P5SharpConfig
+UseP5Sharp(new P5SharpConfig
 {
     LocalTPCServer = true,
     ProjectPath = @"C:\Path\To\Your\Project",  // Use path from P5SharpSync extension
