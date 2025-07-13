@@ -13,6 +13,9 @@ https://www.youtube.com/@P5Sharp
 P5Sharp Sync Extension for Hot Reload on ios and android! 
 https://marketplace.visualstudio.com/items?itemName=AkosKovacs.P5SharpSync
 
+[![Demo 1](https://img.youtube.com/vi/iw2ZliGKVng/hqdefault.jpg)](https://www.youtube.com/watch?v=iw2ZliGKVng)
+ 
+[![Demo 2](https://img.youtube.com/vi/7EqMEnh99-Y/hqdefault.jpg)](https://www.youtube.com/watch?v=7EqMEnh99-Y)
 
 
 Setup Guide
