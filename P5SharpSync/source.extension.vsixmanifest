@@ -7,7 +7,11 @@
 
 Enable real-time hot reload for your P5Sharp MAUI projects when debugging on Android and iOS. This tool helps streamline your development workflow by instantly reflecting code changes without restarting the app.
 
-More information: https://github.com/Akos-Kovacs-Dev/P5Sharp</Description>
+More information: https://github.com/Akos-Kovacs-Dev/P5Sharp
+
+https://www.youtube.com/@P5Sharp
+
+P5Sketch, P5Object Template</Description>
         <MoreInfo>https://github.com/Akos-Kovacs-Dev/P5Sharp</MoreInfo>
         <License>License.txt</License>
         <Icon>P5Sharp.png</Icon>
