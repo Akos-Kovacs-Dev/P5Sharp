@@ -16,8 +16,8 @@ namespace P5SharpSample
                 {
                     IP = "192.168.0.7",
                     Port = 12345,
-                    ProjectPath = @"C:\Users\kKova\Documents\GitHub\P5Sharp\P5SharpSample\",
-                    LocalTPCServer = true
+                    //ProjectPath = @"C:\Users\kKova\Documents\GitHub\P5Sharp\P5SharpSample\",
+                    //LocalTPCServer = true
                 })
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>

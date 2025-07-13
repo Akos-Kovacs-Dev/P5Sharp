@@ -3,11 +3,21 @@
     x:Class="P5SharpSample.Views.LoginPageSample"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:loadingAnimation="clr-namespace:P5SharpSample.Animations.LoadingAnimations"
+    xmlns:backgroundSketch="clr-namespace:P5SharpSample.Animations.BackgroundAnimations"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
     Title="LoginPageSample">
 
     <Grid>
+        <p5:P5SketchView
+            EnableTouchEvents="True"
+            FilesCsv="Animations/BackgroundAnimations/LoginPageBackgroundSketch.cs"
+            FrameRate="60"
+            HotReloadInDebug="true"
+            ReDrawOnSizeChanged="True">
+            <p5:P5SketchView.Sketch>
+                <backgroundSketch:LoginPageBackgroundSketch />
+            </p5:P5SketchView.Sketch>
+        </p5:P5SketchView>
         <ScrollView>
             <VerticalStackLayout
                 Padding="30"
@@ -49,20 +59,7 @@
 
             </VerticalStackLayout>
         </ScrollView>
-        <p5:P5SketchView
-            EnableTouchEvents="False"
-            FilesCsv="Animations/LoadingAnimations/Load2Sketch.cs"
-            FrameRate="60"
-            HeightRequest="100"
-            HorizontalOptions="Center"
-            HotReloadInDebug="False"
-            ReDrawOnSizeChanged="True"
-            VerticalOptions="Center"
-            WidthRequest="100">
-            <p5:P5SketchView.Sketch>
-                <loadingAnimation:Load2Sketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+
     </Grid>
 
 </ContentPage>
