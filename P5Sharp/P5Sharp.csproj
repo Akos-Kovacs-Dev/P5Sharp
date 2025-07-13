@@ -5,28 +5,30 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>AkosKovacs</Authors>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Copyright>MIT</Copyright>
-		<PackageIcon>p5sharpicon.png</PackageIcon>
+		<PackageIcon>P5Sharp.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/Akos-Kovacs-Dev/P5Sharp</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>P5Sharp; Maui; iOS; Android; Windows</PackageTags>
-		<PackageLicenseFile>License.txt</PackageLicenseFile>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.0.3</Version>
+		<Version>1.0.5</Version>
+		<PackageReleaseNotes>Comments added.</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\..\Desktop\License.txt">
+	  <None Include="..\Images\P5Sharp.png">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
-	  <None Include="..\..\..\Downloads\p5sharpicon.png">
+	  <None Include="..\LICENSE">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
-	  <None Include="..\..\GitHub\P5Sharp\README.md">
+	  <None Include="..\README.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
