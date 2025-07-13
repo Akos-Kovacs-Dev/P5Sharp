@@ -9,10 +9,10 @@
     <VerticalStackLayout VerticalOptions="Center">
         <p5:P5SketchView
             EnableTouchEvents="True"
-            FilesCsv="Animations/PurpleRain/ButtonAnimations/Load1Sketch.cs"
+            FilesCsv="Animations/LoadingAnimations/Load1Sketch.cs"
             FrameRate="60"
             HeightRequest="100"
-            HotReloadInDebug="True"
+            HotReloadInDebug="False"
             ReDrawOnSizeChanged="True"
             WidthRequest="200">
             <p5:P5SketchView.Sketch>
@@ -21,15 +21,26 @@
         </p5:P5SketchView>
 
         <p5:P5SketchView
-            EnableTouchEvents="True"
-            FilesCsv="Animations/PurpleRain/ButtonAnimations/Load2Sketch.cs"
+            FilesCsv="Animations/LoadingAnimations/Load2Sketch.cs"
             FrameRate="60"
+            HeightRequest="100"
+            HotReloadInDebug="False"
+            ReDrawOnSizeChanged="True"
+            WidthRequest="100">
+            <p5:P5SketchView.Sketch>
+                <sketches:Load2Sketch />
+            </p5:P5SketchView.Sketch>
+        </p5:P5SketchView>
+
+        <p5:P5SketchView
+            FilesCsv="Animations/LoadingAnimations/Load3Sketch.cs"
+            FrameRate="15"
             HeightRequest="100"
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
             WidthRequest="100">
             <p5:P5SketchView.Sketch>
-                <sketches:Load2Sketch />
+                <sketches:Load3Sketch />
             </p5:P5SketchView.Sketch>
         </p5:P5SketchView>
     </VerticalStackLayout>

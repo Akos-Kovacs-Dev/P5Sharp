@@ -166,7 +166,7 @@
                 {
                     foreach (var file in Files)
                     {
-                        //C:\Users\kKova\Documents\P5Sharp\P5SharpSample\Animations\PurpleRain\PurpleRainSketch.cs
+               
                         string fullPath = Path.Combine(settings.ProjectPath, file)
                                          .Replace('/', Path.DirectorySeparatorChar)
                                          .Replace('\\', Path.DirectorySeparatorChar);
