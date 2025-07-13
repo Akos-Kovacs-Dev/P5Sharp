@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="P5SharpSync.29201094-2d21-493a-b970-205b340aa1d8" Version="1.2" Language="en-US" Publisher="AkosKovacs" />
+        <DisplayName>P5SharpSync</DisplayName>
+        <Description xml:space="preserve">Real-time Hot Reload for P5Sharp MAUI Projects
+
+Enable real-time hot reload for your P5Sharp MAUI projects when debugging on Android and iOS. This tool helps streamline your development workflow by instantly reflecting code changes without restarting the app.
+
+More information: https://github.com/Akos-Kovacs-Dev/P5Sharp</Description>
+        <MoreInfo>https://github.com/Akos-Kovacs-Dev/P5Sharp</MoreInfo>
+        <License>License.txt</License>
+        <Icon>P5Sharp.png</Icon>
+        <PreviewImage>sh.jpg</PreviewImage>
+        <Tags>P5Sharp, HotReload, Maui, Android, Windows, iOS</Tags>
+        <Preview>true</Preview>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project"  d:ProjectName="P5SharpSync" Path="|P5SharpSync;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="File" Path="ItemTemplates" d:TargetPath="ItemTemplates\P5SketchTemplate.zip" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="File" Path="ItemTemplates" d:TargetPath="ItemTemplates\P5ObjectTemplate.zip" />
+    </Assets>
+</PackageManifest>
