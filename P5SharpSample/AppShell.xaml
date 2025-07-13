@@ -40,6 +40,11 @@
         Route="MatrixPage" />
 
 
+    <ShellContent
+        Title="Login Page Sample"
+        ContentTemplate="{DataTemplate views:LoginPageSample}"
+        Route="LoginPageSample" />
+
 
 
 

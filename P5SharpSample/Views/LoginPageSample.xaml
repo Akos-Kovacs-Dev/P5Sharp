@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P5SharpSample.Views.LoginPageSample"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:loadingAnimation="clr-namespace:P5SharpSample.Animations.LoadingAnimations"
+    xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
+    Title="LoginPageSample">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="30"
+                HorizontalOptions="Center"
+                Spacing="20"
+                VerticalOptions="Center">
+
+                <Image MaximumWidthRequest="300" Source="p5sharp.png" />
+
+
+                <Entry
+                    Margin="0,10"
+                    BackgroundColor="#EFEFEF"
+                    HeightRequest="50"
+                    Keyboard="Email"
+                    Placeholder="Username or Email"
+                    TextColor="Black" />
+
+                <Entry
+                    Margin="0,10"
+                    BackgroundColor="#EFEFEF"
+                    HeightRequest="50"
+                    IsPassword="True"
+                    Placeholder="Password"
+                    TextColor="Black" />
+
+                <Button
+                    BackgroundColor="#007AFF"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Text="Login"
+                    TextColor="White" />
+
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="Forgot your password?"
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+        <p5:P5SketchView
+            EnableTouchEvents="False"
+            FilesCsv="Animations/LoadingAnimations/Load2Sketch.cs"
+            FrameRate="60"
+            HeightRequest="100"
+            HorizontalOptions="Center"
+            HotReloadInDebug="False"
+            ReDrawOnSizeChanged="True"
+            VerticalOptions="Center"
+            WidthRequest="100">
+            <p5:P5SketchView.Sketch>
+                <loadingAnimation:Load2Sketch />
+            </p5:P5SketchView.Sketch>
+        </p5:P5SketchView>
+    </Grid>
+
+</ContentPage>

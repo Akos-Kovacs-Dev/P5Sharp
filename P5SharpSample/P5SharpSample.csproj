@@ -94,6 +94,9 @@
 	  <MauiXaml Update="Views\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\LoginPageSample.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MatrixPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
