@@ -45,6 +45,11 @@
         ContentTemplate="{DataTemplate views:LoginPageSample}"
         Route="LoginPageSample" />
 
+    <ShellContent
+        Title="Entries"
+        ContentTemplate="{DataTemplate views:EntriesPage}"
+        Route="EntriesPage" />
+
 
 
 

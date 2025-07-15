@@ -18,7 +18,7 @@
                 <backgroundSketch:LoginPageBackgroundSketch />
             </p5:P5SketchView.Sketch>
         </p5:P5SketchView>
-        <ScrollView>
+        <ScrollView HorizontalOptions="Center">
             <VerticalStackLayout
                 Padding="30"
                 HorizontalOptions="Center"

@@ -15,17 +15,14 @@ namespace P5SharpSample
                 .UseP5Sharp(new P5SharpConfig
                 {
                     IP = "192.168.0.7",
-                    Port = 12345,
-                    //ProjectPath = @"C:\Users\kKova\Documents\GitHub\P5Sharp\P5SharpSample\",
-                    //LocalTPCServer = true
+                    Port = 12345,                    
+                    LocalTPCServer = true,
                 })
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("matrix.ttf", "matrix");
-                
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");                
                 });
 
 #if DEBUG

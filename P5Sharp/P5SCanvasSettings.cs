@@ -30,7 +30,7 @@ namespace P5Sharp
         /// Run tpc server with out P5SharpSync extension. Windows only!
         /// </summary>
         public bool LocalTPCServer { get; set; } = true;
-        public string? ProjectPath { get; set; }
+         
 
         
     }

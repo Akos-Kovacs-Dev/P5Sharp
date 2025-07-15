@@ -52,7 +52,7 @@ namespace P5SharpSample.Animations.ButtonAnimations
             fill("white");
             textSize(30);
             
-            Text("Button");
+            Text("Button" );
             
         }
     }
