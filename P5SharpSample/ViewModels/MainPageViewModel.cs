@@ -17,7 +17,7 @@ namespace P5SharpSample.ViewModels
 
 
         private SKCanvasView ButtonCanvas;
-        private P5Sketch SketchLoader;
+        
        // private WaterRippleSketch WaterRippleSketch;
 
 

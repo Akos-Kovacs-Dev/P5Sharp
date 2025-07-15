@@ -88,6 +88,9 @@
 	  <MauiXaml Update="Views\ButtonsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\EntriesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\GameOfLifePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
