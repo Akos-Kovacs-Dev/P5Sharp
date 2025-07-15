@@ -16,26 +16,12 @@ namespace P5SharpSample.ViewModels
 
 
 
-        private SKCanvasView ButtonCanvas;
-        
-       // private WaterRippleSketch WaterRippleSketch;
+  
 
 
-        public MainPageViewModel(SKCanvasView buttonCanvas)
+        public MainPageViewModel()
         {
-
-         //   P5SCanvasSettings gameoflifesettings = new P5SCanvasSettings()
-         //   {
-         //       IPAddress = "192.168.0.7",
-         //       Port = 12345,
-         //       CanvasView = ButtonCanvas = buttonCanvas,
-         //       Files = new List<string>() { "Animations/ButtonAnimations/WaterRippleSketch.cs" },
-         //       Sketch = WaterRippleSketch = new WaterRippleSketch(),
-         //       LocalTPCServer = false,
-         //       //ProjectPath = "C:\\Users\\kKova\\Documents\\P5SharpSample"
-         //   };
-
-        //    SketchLoader = new P5Sketch(gameoflifesettings);
+ 
 
         }
 

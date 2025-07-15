@@ -17,7 +17,6 @@ P5Sketch, P5Object Template</Description>
         <Icon>P5Sharp.png</Icon>
         <PreviewImage>sh.jpg</PreviewImage>
         <Tags>P5Sharp, HotReload, Maui, Android, Windows, iOS</Tags>
-        <Preview>true</Preview>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">

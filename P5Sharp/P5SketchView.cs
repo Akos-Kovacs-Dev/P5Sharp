@@ -2,17 +2,13 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Controls;
 using P5Sharp.P5Sharp;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Reflection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace P5Sharp
 {
@@ -21,39 +17,33 @@ namespace P5Sharp
         private readonly SKCanvasView _canvasView = new();
         private readonly P5SharpConfig _p5sharpConfig;
 
-        // Fields merged from P5Sketch:
         private SketchBase _sketch;
+        private Dictionary<string, Action<string>> _sketchActions = new();
+        private Client _client;
+        private Server _server;
+
         private bool _runSetup = true;
-        private int _frameRate = 16;
-        private string _serverIp;
-        private int _serverPort;
-        private List<string> _files;
+        private bool _isRunning = false;
+
+        private int _frameRate = 60;
+        private List<string> _files = new();
         private bool _hotReloadInDebug = true;
         private bool _reDrawOnSizeChanged = true;
-        private Server _server;
-        private Client _client;
-        private Dictionary<string, Action<string>> _sketchActions = new Dictionary<string, Action<string>>();
+
+        private string _serverIp;
+        private int _serverPort;
 
         public P5SketchView()
         {
             Content = _canvasView;
 
-            var serviceProvider = Application.Current?.Handler?.MauiContext?.Services;
-            if (serviceProvider != null)
-            {
-                _p5sharpConfig = serviceProvider.GetService<P5SharpConfig>();
-            }
-            else
-            {
-                throw new InvalidOperationException("Service provider not available. Ensure this is called after MAUI is initialized.");
-            }
+            _p5sharpConfig = Application.Current?.Handler?.MauiContext?.Services?.GetService<P5SharpConfig>()
+                               ?? throw new InvalidOperationException("Service provider not available. Ensure this is called after MAUI is initialized.");
 
             _canvasView.PaintSurface += OnCanvasViewPaintSurface;
-            Loaded += (s, e) => StartLoop();
-            Unloaded += (s, e) => StopLoop();
+            Loaded += (_, _) => StartLoop();
+            Unloaded += (_, _) => StopLoop();
         }
-
-        
 
         #region Bindable Properties
 
@@ -126,14 +116,12 @@ namespace P5Sharp
 
         #endregion
 
-        #region Property Changed Callbacks
+        #region Property Changed Handlers
 
         private static void OnSketchChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is P5SketchView view && newValue is SketchBase sketch)
-            {
                 view.InitializeInternal(sketch);
-            }
         }
 
         private static void OnFilesCsvChanged(BindableObject bindable, object oldValue, object newValue)
@@ -157,69 +145,67 @@ namespace P5Sharp
             _files = Files;
             _hotReloadInDebug = HotReloadInDebug;
             _reDrawOnSizeChanged = ReDrawOnSizeChanged;
-
             _sketchActions = sketch?.SketchActions;
 
             _canvasView.EnableTouchEvents = EnableTouchEvents;
-
             _serverIp = _p5sharpConfig?.IP;
             _serverPort = _p5sharpConfig?.Port ?? 0;
 
             if (_files == null || !_files.Any())
                 throw new Exception("No Sketch file attached to P5SketchView.");
 
-            InitializeSketchAndServer();
+            if (_hotReloadInDebug && IsDebug())
+                InitializeSketchAndServer();
+
             AddEventsFromCanvasToSketch();
         }
 
+
+    
+
+
         private void InitializeSketchAndServer()
         {
+
+             
+
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                if (_p5sharpConfig.LocalTPCServer)
+                
+
+                try
                 {
-                    if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                    {
-                        if (!Directory.Exists(_p5sharpConfig.ProjectPath))
-                        {
-                            throw new Exception("Project path invalid!");
-                        }
+                    if (string.IsNullOrEmpty(_serverIp))
+                        throw new Exception("HotReload missing IP");
+                    if (_serverPort == 0)
+                        throw new Exception("HotReload missing port");
 
-                        Func<string, Task> logCallback = async (message) =>
-                        {
-                            Console.WriteLine($"Log: {message}");
-                            await Task.CompletedTask;
-                        };
-
-                        _server = new Server(_serverPort, logCallback);
-                        _ = Task.Run(async () =>
-                        {
-                            await _server.StartAsync(_p5sharpConfig.ProjectPath);
-                        });
-                    }
+                    _client = new Client(_serverIp, _serverPort);
+                    _ = _client.StartTcpCommunicationAsync(_files, GetSketchCallback());
                 }
-              
-
-                if (_hotReloadInDebug)
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        if (string.IsNullOrEmpty(_serverIp))
-                            throw new Exception("HotReload in debug missing IP");
-
-                        if (_serverPort == 0)
-                            throw new Exception("HotReload in debug missing port");
-
-                          _client = new Client(_serverIp, _serverPort);
-                        _ = _client.StartTcpCommunicationAsync(_files, GetSketchCallback());
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"TCP Client Failed: {ex.Message}");
-                    }
+                    System.Diagnostics.Debug.WriteLine($"TCP Client Failed: {ex.Message}");
                 }
+
             });
         }
+
+
+
+
+        bool IsDebug()
+        {
+            var attributes = Assembly.GetExecutingAssembly()
+                .GetCustomAttributes(typeof(DebuggableAttribute), false);
+
+            if (attributes.Length == 0)
+                return false;
+
+            var debuggable = (DebuggableAttribute)attributes[0];
+            return debuggable.IsJITTrackingEnabled;
+        }
+
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
@@ -247,30 +233,29 @@ namespace P5Sharp
             }
         }
 
+
         private void AddEventsFromCanvasToSketch()
         {
             if (_canvasView.EnableTouchEvents)
             {
                 _canvasView.Touch += (s, e) =>
                 {
-                    var point = e.Location;
+                    var pt = e.Location;
 
                     switch (e.ActionType)
                     {
                         case SKTouchAction.Pressed:
-                            _sketch?.OnMouseDown(point.X, point.Y);
-                            _sketch?.OnTouchStart(point.X, point.Y);
+                            _sketch?.OnMouseDown(pt.X, pt.Y);
+                            _sketch?.OnTouchStart(pt.X, pt.Y);
                             break;
-
                         case SKTouchAction.Moved:
-                            _sketch?.OnMouseMove(point.X, point.Y);
-                            _sketch?.OnTouchMove(point.X, point.Y);
+                            _sketch?.OnMouseMove(pt.X, pt.Y);
+                            _sketch?.OnTouchMove(pt.X, pt.Y);
                             break;
-
                         case SKTouchAction.Released:
                         case SKTouchAction.Cancelled:
-                            _sketch?.OnMouseUp(point.X, point.Y);
-                            _sketch?.OnTouchEnd(point.X, point.Y);
+                            _sketch?.OnMouseUp(pt.X, pt.Y);
+                            _sketch?.OnTouchEnd(pt.X, pt.Y);
                             break;
                     }
 
@@ -283,14 +268,14 @@ namespace P5Sharp
                 _canvasView.SizeChanged += (s, e) =>
                 {
                     _runSetup = true;
-                    _canvasView?.InvalidateSurface();
+                    _canvasView.InvalidateSurface();
                 };
             }
         }
 
-        public Func<string, Task> GetSketchCallback()
+        private Func<string, Task> GetSketchCallback()
         {
-            return async (string code) =>
+            return async (code) =>
             {
                 _sketch = await LoadSketchText(code);
                 _runSetup = true;
@@ -304,21 +289,19 @@ namespace P5Sharp
                 .AddReferences(typeof(SKCanvas).Assembly, typeof(SketchBase).Assembly)
                 .AddImports("System", "SkiaSharp");
 
-            if (HasSyntaxErrors(code))
-                return await RunErrorSketch("Syntax error detected in the code.");
-
             if (string.IsNullOrEmpty(code))
                 return await RunErrorSketch("Sketch data is empty!");
 
+            if (HasSyntaxErrors(code))
+                return await RunErrorSketch("Syntax error detected in the code.");
+
             try
             {
-                var r = await CSharpScript.EvaluateAsync<SketchBase>(code, options);
-                return r;
+                return await CSharpScript.EvaluateAsync<SketchBase>(code, options);
             }
             catch (CompilationErrorException ex)
             {
-                string errormessage = string.Join(Environment.NewLine, ex.Diagnostics.Select(d => d.ToString()));
-                return await RunErrorSketch(errormessage);
+                return await RunErrorSketch(string.Join(Environment.NewLine, ex.Diagnostics.Select(d => d.ToString())));
             }
             catch (Exception ex)
             {
@@ -329,67 +312,52 @@ namespace P5Sharp
         private bool HasSyntaxErrors(string code)
         {
             var tree = CSharpSyntaxTree.ParseText(code);
-            var diagnostics = tree.GetDiagnostics();
-            return diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error);
+            return tree.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error);
         }
 
         private async Task<SketchBase> RunErrorSketch(string message)
         {
             var errorCode = SketchMessages.ErrorSketch(message);
-            var options = ScriptOptions.Default
-                .AddReferences(typeof(SKCanvas).Assembly, typeof(SketchBase).Assembly)
-                .AddImports("System", "SkiaSharp");
 
-            return await CSharpScript.EvaluateAsync<SketchBase>(errorCode, options);
+            return await CSharpScript.EvaluateAsync<SketchBase>(
+                errorCode,
+                ScriptOptions.Default
+                    .AddReferences(typeof(SKCanvas).Assembly, typeof(SketchBase).Assembly)
+                    .AddImports("System", "SkiaSharp"));
         }
 
-        /// <summary>
-        /// Call this to invoke an action defined in the sketch (e.g. triggered from UI)
-        /// </summary>
         public void InvokeSketchAction(string actionName, string arg = "")
         {
-            if (_sketchActions != null && _sketchActions.TryGetValue(actionName, out var action))
-            {
+            if (_sketchActions?.TryGetValue(actionName, out var action) == true)
                 action?.Invoke(arg);
-            }
         }
 
-
-        private bool _isRunning = false;
-
-        /// <summary>
-        /// Starts the redraw loop (if needed)
-        /// </summary>
         private void StartLoop()
         {
             _isRunning = true;
             _client?.ResumeAsync();
+
             _canvasView.Dispatcher.StartTimer(TimeSpan.FromMilliseconds(1000.0 / _frameRate), () =>
             {
-                if (!_isRunning)
-                    return false; // stops the timer
+                if (!_isRunning) return false;
 
                 try
                 {
-                    _canvasView?.InvalidateSurface();
-                    return true; // keep running
+                    _canvasView.InvalidateSurface();
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine($"CanvasView invalidate failed: {ex.Message}");
-                    return false; // stop timer on error
+                    return false;
                 }
             });
         }
 
-        /// <summary>
-        /// Stops redraw loop
-        /// </summary>
         private void StopLoop()
         {
             _isRunning = false;
             _client?.Pause();
-            
         }
     }
 }
