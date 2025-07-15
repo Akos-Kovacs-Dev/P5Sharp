@@ -363,7 +363,7 @@ namespace P5Sharp
         private void StartLoop()
         {
             _isRunning = true;
-            _client.ResumeAsync();
+            _client?.ResumeAsync();
             _canvasView.Dispatcher.StartTimer(TimeSpan.FromMilliseconds(1000.0 / _frameRate), () =>
             {
                 if (!_isRunning)
@@ -388,7 +388,7 @@ namespace P5Sharp
         private void StopLoop()
         {
             _isRunning = false;
-            _client.Pause();
+            _client?.Pause();
             
         }
     }
