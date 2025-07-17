@@ -20,7 +20,8 @@ namespace P5SharpSample.Animations.ButtonAnimations
             {
                    animate = true;                
                     x = 0;
-               
+
+                SketchCommand?.Execute(null);
                 
             });
 

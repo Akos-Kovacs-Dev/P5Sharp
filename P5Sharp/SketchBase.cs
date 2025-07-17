@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using System.Windows.Input;
 
 namespace P5Sharp
 {
@@ -8,6 +9,7 @@ namespace P5Sharp
 
         public Dictionary<string, Action<string>> SketchActions { get; set; } = new Dictionary<string, Action<string>>();
 
+        public ICommand SketchCommand { get; set; }
 
         public SketchBase()
         {

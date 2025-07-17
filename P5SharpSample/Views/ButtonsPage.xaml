@@ -5,8 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
     xmlns:sketch="clr-namespace:P5SharpSample.Animations.ButtonAnimations"
+    xmlns:vm="clr-namespace:P5SharpSample.ViewModels"
     Title="Buttons">
-    <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+    <VerticalStackLayout
+        x:DataType="vm:ButtonsPageViewModel"
+        Spacing="20"
+        VerticalOptions="Center">
         <p5:P5SketchView
             EnableTouchEvents="True"
             FilesCsv="Animations/ButtonAnimations/Button1Sketch.cs"
@@ -15,6 +19,7 @@
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
             Sketch="{sketch:Button1Sketch}"
+            SketchCommand="{Binding Button1Command}"
             WidthRequest="200" />
 
         <p5:P5SketchView
@@ -35,6 +40,17 @@
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
             Sketch="{sketch:Button3Sketch}"
+            WidthRequest="200" />
+
+        <p5:P5SketchView
+            BackgroundColor="Transparent"
+            EnableTouchEvents="True"
+            FilesCsv="Animations/ButtonAnimations/Button4Sketch.cs"
+            FrameRate="60"
+            HeightRequest="60"
+            HotReloadInDebug="True"
+            ReDrawOnSizeChanged="True"
+            Sketch="{sketch:Button4Sketch}"
             WidthRequest="200" />
     </VerticalStackLayout>
 </ContentPage>

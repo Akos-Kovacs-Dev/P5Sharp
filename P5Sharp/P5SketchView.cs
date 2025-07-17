@@ -8,29 +8,37 @@ using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows.Input;
 
 namespace P5Sharp
 {
     public class P5SketchView : ContentView
     {
+        #region Fields
+
         private readonly SKCanvasView _canvasView = new();
         private readonly P5SharpConfig _p5sharpConfig;
 
         private SketchBase _sketch;
         private Dictionary<string, Action<string>> _sketchActions = new();
         private Client _client;
-        private Server _server;
+        
 
         private bool _runSetup = true;
         private bool _isRunning = false;
 
         private int _frameRate = 60;
+        private ICommand _sketchCommand;
         private List<string> _files = new();
         private bool _hotReloadInDebug = true;
         private bool _reDrawOnSizeChanged = true;
 
         private string _serverIp;
         private int _serverPort;
+
+        #endregion
+
+        #region Constructor
 
         public P5SketchView()
         {
@@ -43,6 +51,8 @@ namespace P5Sharp
             Loaded += (_, _) => StartLoop();
             Unloaded += (_, _) => StopLoop();
         }
+
+        #endregion
 
         #region Bindable Properties
 
@@ -66,6 +76,10 @@ namespace P5Sharp
 
         public static readonly BindableProperty ReDrawOnSizeChangedProperty =
             BindableProperty.Create(nameof(ReDrawOnSizeChanged), typeof(bool), typeof(P5SketchView), true);
+
+        public static readonly BindableProperty SketchCommandProperty = 
+            BindableProperty.Create(nameof(SketchCommand),typeof(ICommand),typeof(P5SketchView),default(ICommand), propertyChanged: OnSketchChanged);
+        
 
         #endregion
 
@@ -113,6 +127,11 @@ namespace P5Sharp
             set => SetValue(ReDrawOnSizeChangedProperty, value);
         }
 
+        public ICommand SketchCommand
+        {
+            get => (ICommand)GetValue(SketchCommandProperty);
+            set => SetValue(SketchCommandProperty, value);
+        }
         #endregion
 
         #region Property Changed Handlers
@@ -135,6 +154,8 @@ namespace P5Sharp
 
         #endregion
 
+        #region Initialization
+
         private void InitializeInternal(SketchBase sketch)
         {
             _sketch = sketch;
@@ -143,6 +164,7 @@ namespace P5Sharp
             _frameRate = FrameRate;
             _files = Files;
             _hotReloadInDebug = HotReloadInDebug;
+            _sketchCommand = SketchCommand;
             _reDrawOnSizeChanged = ReDrawOnSizeChanged;
             _sketchActions = sketch?.SketchActions;
 
@@ -159,23 +181,15 @@ namespace P5Sharp
             AddEventsFromCanvasToSketch();
         }
 
-
-
-
-
         private void InitializeSketchAndServer()
         {
-
-
-
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-
-
                 try
                 {
                     if (string.IsNullOrEmpty(_serverIp))
                         throw new Exception("HotReload missing IP");
+
                     if (_serverPort == 0)
                         throw new Exception("HotReload missing port");
 
@@ -184,27 +198,21 @@ namespace P5Sharp
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"TCP Client Failed: {ex.Message}");
+                    Debug.WriteLine($"TCP Client Failed: {ex.Message}");
                 }
-
             });
         }
 
-
-
-
-        bool IsDebug()
+        private bool IsDebug()
         {
-            var attributes = Assembly.GetExecutingAssembly()
-                .GetCustomAttributes(typeof(DebuggableAttribute), false);
-
-            if (attributes.Length == 0)
-                return false;
-
-            var debuggable = (DebuggableAttribute)attributes[0];
-            return debuggable.IsJITTrackingEnabled;
+            var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(DebuggableAttribute), false);
+            if (attributes.Length == 0) return false;
+            return ((DebuggableAttribute)attributes[0]).IsJITTrackingEnabled;
         }
 
+        #endregion
+
+        #region Drawing
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
@@ -217,32 +225,28 @@ namespace P5Sharp
                 memory._canvas = canvas;
                 memory._info = info;
 
-
-                if (!_runSetup)
-                {
-                    _sketch?.OnDraw(memory);
-                    return;
-                }
-                else
+                if (_runSetup)
                 {
                     _sketch?.OnSetup(canvas, info);
                     _sketch?.clear();
                     _sketchActions = _sketch?.SketchActions;
+                    _sketch.SketchCommand = _sketchCommand;
                     _runSetup = false;
                 }
-
+                else
+                {
+                    _sketch?.OnDraw(memory);
+                }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error during drawing: {ex}");
+                Debug.WriteLine($"Error during drawing: {ex}");
             }
-
-
-
-
-
         }
 
+        #endregion
+
+        #region Touch + Size Events
 
         private void AddEventsFromCanvasToSketch()
         {
@@ -251,7 +255,6 @@ namespace P5Sharp
                 _canvasView.Touch += (s, e) =>
                 {
                     var pt = e.Location;
-
                     switch (e.ActionType)
                     {
                         case SKTouchAction.Pressed:
@@ -282,6 +285,10 @@ namespace P5Sharp
                 };
             }
         }
+
+        #endregion
+
+        #region Hot Reload / Script Evaluation
 
         private Func<string, Task> GetSketchCallback()
         {
@@ -336,6 +343,10 @@ namespace P5Sharp
                     .AddImports("System", "SkiaSharp"));
         }
 
+        #endregion
+
+        #region Actions & Loop
+
         public void InvokeSketchAction(string actionName, string arg = "")
         {
             if (_sketchActions?.TryGetValue(actionName, out var action) == true)
@@ -358,12 +369,11 @@ namespace P5Sharp
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"CanvasView invalidate failed: {ex.Message}");
+                    Debug.WriteLine($"CanvasView invalidate failed: {ex.Message}");
                     return false;
                 }
             });
         }
-
 
         private void StopLoop()
         {
@@ -373,5 +383,7 @@ namespace P5Sharp
             _runSetup = true;
             _canvasView.InvalidateSurface();
         }
+
+        #endregion
     }
 }
