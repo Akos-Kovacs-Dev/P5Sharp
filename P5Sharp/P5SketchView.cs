@@ -28,7 +28,7 @@ namespace P5Sharp
         private bool _isRunning = false;
 
         private int _frameRate = 60;
-        private ICommand _sketchCommand;
+        
         private List<string> _files = new();
         private bool _hotReloadInDebug = true;
         private bool _reDrawOnSizeChanged = true;
@@ -163,8 +163,7 @@ namespace P5Sharp
 
             _frameRate = FrameRate;
             _files = Files;
-            _hotReloadInDebug = HotReloadInDebug;
-            _sketchCommand = SketchCommand;
+            _hotReloadInDebug = HotReloadInDebug;            
             _reDrawOnSizeChanged = ReDrawOnSizeChanged;
             _sketchActions = sketch?.SketchActions;
 
@@ -230,7 +229,7 @@ namespace P5Sharp
                     _sketch?.OnSetup(canvas, info);
                     _sketch?.clear();
                     _sketchActions = _sketch?.SketchActions;
-                    _sketch.SketchCommand = _sketchCommand;
+                    _sketch.SketchCommand = SketchCommand;
                     _runSetup = false;
                 }
                 else

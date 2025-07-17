@@ -15,8 +15,13 @@ namespace P5SharpSample.Animations.ButtonAnimations
         private float ButtonWidth;
         private float ButtonHeight;
         private float ButtonRadius = 10;
+        private bool Running = false;
+        private bool Completed = false;
+        private bool Failed = false;
  
         private float FrameCount = 0.1f;
+
+
         protected override void Setup()
         {
             ButtonWidth = Width - 20;
@@ -24,7 +29,24 @@ namespace P5SharpSample.Animations.ButtonAnimations
             ShowText = true;
             OnMousePress = new Action<float, float>((x, y) =>
             {
+                if (Running)
+                    return;
+                Running = true;
+                if (SketchCommand.CanExecute(null))
+                {
+                    SketchCommand.Execute(null);
+                }
                 Shrink = true;
+            });
+
+            SketchActions.Add("LoadCompleted", (empty) =>
+            {
+                Completed = true;
+            });
+
+            SketchActions.Add("LoadFailed", (empty) =>
+            {
+                Failed = true;
             });
 
         }
@@ -37,7 +59,21 @@ namespace P5SharpSample.Animations.ButtonAnimations
             if (FrameCount == TWO_PI)
                 FrameCount = 0.1f;
             translate(Width / 2,Height/2);
-            fill(21, 153, 249);
+
+            if (Completed)
+            {
+                fill("green");
+            }
+            else if (Failed)
+            {
+                fill("red");
+            }
+            else
+            {
+                fill(21, 153, 249);
+            }
+
+                
             RectMode(Rectmode.CENTER);
             noStroke();
 
@@ -64,7 +100,7 @@ namespace P5SharpSample.Animations.ButtonAnimations
                 fill("white");
                 text("Send", 0, 5);
             }
-
+            if(!Completed && !Failed)
             if (Loading)
             {
                 noFill();

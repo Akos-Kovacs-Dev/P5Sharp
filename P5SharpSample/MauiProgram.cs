@@ -1,7 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using P5Sharp;
-using SkiaSharp.Views.Maui.Controls.Hosting;
+using P5SharpSample.Helpers;
+using P5SharpSample.Interfaces;
+using P5SharpSample.ViewModels;
+using P5SharpSample.Views;
+
 
 namespace P5SharpSample
 {
@@ -28,6 +32,19 @@ namespace P5SharpSample
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            #region Views
+            builder.Services.AddSingleton<ButtonsPage>();
+            #endregion
+
+            #region ViewModels
+            builder.Services.AddSingleton<ButtonsPageViewModel>();
+            #endregion
+
+            #region Services
+            builder.Services.AddSingleton<IMockAPIService, MockAPIService>();
+            #endregion
+
 
             return builder.Build();
         }

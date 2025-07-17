@@ -43,6 +43,7 @@
             WidthRequest="200" />
 
         <p5:P5SketchView
+            x:Name="Button4Sketch"
             BackgroundColor="Transparent"
             EnableTouchEvents="True"
             FilesCsv="Animations/ButtonAnimations/Button4Sketch.cs"
@@ -51,6 +52,7 @@
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
             Sketch="{sketch:Button4Sketch}"
+            SketchCommand="{Binding Button4Command}"
             WidthRequest="200" />
     </VerticalStackLayout>
 </ContentPage>

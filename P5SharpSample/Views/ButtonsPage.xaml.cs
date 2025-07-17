@@ -1,10 +1,13 @@
+using P5SharpSample.ViewModels;
+
 namespace P5SharpSample.Views;
 
 public partial class ButtonsPage : ContentPage
 {
-	public ButtonsPage()
+	public ButtonsPage(ButtonsPageViewModel vm)
 	{
 		InitializeComponent();
-		BindingContext = new ViewModels.ButtonsPageViewModel();
+		vm.Button4Sketch = Button4Sketch;
+		BindingContext = vm;
 	}
 }
