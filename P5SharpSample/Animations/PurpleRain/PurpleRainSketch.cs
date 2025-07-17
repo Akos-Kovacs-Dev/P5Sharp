@@ -47,7 +47,7 @@ namespace P5SharpSample.Animations.PurpleRain
         protected override void Setup()
         {
 
-
+            RainList.Clear();//want to clear them first on canvas resize
             stroke("black");
             fill(138, 43, 225);
             for (int i = 0; i < 500; i++)

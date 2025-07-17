@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
-    xmlns:sketches="clr-namespace:P5SharpSample.Animations.PurpleRain"
+    xmlns:sketch="clr-namespace:P5SharpSample.Animations.PurpleRain"
     Title="Purple Rain">
 
     <p5:P5SketchView
@@ -13,9 +13,6 @@
         FilesCsv="Animations/PurpleRain/PurpleRainSketch.cs"
         FrameRate="60"
         HotReloadInDebug="True"
-        ReDrawOnSizeChanged="True">
-        <p5:P5SketchView.Sketch>
-            <sketches:PurpleRainSketch />
-        </p5:P5SketchView.Sketch>
-    </p5:P5SketchView>
+        ReDrawOnSizeChanged="True"
+        Sketch="{sketch:PurpleRainSketch}" />
 </ContentPage>

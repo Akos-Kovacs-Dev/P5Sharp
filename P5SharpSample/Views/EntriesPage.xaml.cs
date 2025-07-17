@@ -18,7 +18,6 @@ public partial class EntriesPage : ContentPage
 
     private void NativeEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
-       // _p5Sketch.SketchActions["Keystroke"].Invoke(e.NewTextValue);
-      
+        Entry1.InvokeSketchAction("Keystroke",e.NewTextValue);      
     }
 }

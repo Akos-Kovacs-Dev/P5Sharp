@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
-    xmlns:sketches="clr-namespace:P5SharpSample.Animations.ButtonAnimations"
+    xmlns:sketch="clr-namespace:P5SharpSample.Animations.ButtonAnimations"
     Title="Buttons">
     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
         <p5:P5SketchView
@@ -14,11 +14,8 @@
             HeightRequest="100"
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
-            WidthRequest="200">
-            <p5:P5SketchView.Sketch>
-                <sketches:Button1Sketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+            Sketch="{sketch:Button1Sketch}"
+            WidthRequest="200" />
 
         <p5:P5SketchView
             EnableTouchEvents="True"
@@ -27,11 +24,8 @@
             HeightRequest="100"
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
-            WidthRequest="200">
-            <p5:P5SketchView.Sketch>
-                <sketches:Button2Sketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+            Sketch="{sketch:Button2Sketch}"
+            WidthRequest="200" />
 
         <p5:P5SketchView
             EnableTouchEvents="True"
@@ -40,10 +34,7 @@
             HeightRequest="100"
             HotReloadInDebug="True"
             ReDrawOnSizeChanged="True"
-            WidthRequest="200">
-            <p5:P5SketchView.Sketch>
-                <sketches:Button3Sketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+            Sketch="{sketch:Button3Sketch}"
+            WidthRequest="200" />
     </VerticalStackLayout>
 </ContentPage>

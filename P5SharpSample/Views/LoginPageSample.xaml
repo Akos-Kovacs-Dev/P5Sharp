@@ -3,7 +3,7 @@
     x:Class="P5SharpSample.Views.LoginPageSample"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:backgroundSketch="clr-namespace:P5SharpSample.Animations.BackgroundAnimations"
+    xmlns:bgSketch="clr-namespace:P5SharpSample.Animations.BackgroundAnimations"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
     Title="LoginPageSample">
 
@@ -13,11 +13,8 @@
             FilesCsv="Animations/BackgroundAnimations/LoginPageBackgroundSketch.cs"
             FrameRate="60"
             HotReloadInDebug="true"
-            ReDrawOnSizeChanged="True">
-            <p5:P5SketchView.Sketch>
-                <backgroundSketch:LoginPageBackgroundSketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+            ReDrawOnSizeChanged="True"
+            Sketch="{bgSketch:LoginPageBackgroundSketch}" />
         <ScrollView HorizontalOptions="Center">
             <VerticalStackLayout
                 Padding="30"

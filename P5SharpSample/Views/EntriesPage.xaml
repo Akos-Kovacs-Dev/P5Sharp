@@ -18,11 +18,8 @@
             FrameRate="60"
             HotReloadInDebug="True"
             InputTransparent="True"
-            ReDrawOnSizeChanged="True">
-            <p5:P5SketchView.Sketch>
-                <sketches:Entry1Sketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+            ReDrawOnSizeChanged="True"
+            Sketch="{sketches:Entry1Sketch}" />
 
     </Grid>
 

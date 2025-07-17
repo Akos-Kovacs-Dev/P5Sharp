@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
-    xmlns:sketches="clr-namespace:P5SharpSample.Animations.GameOfLife"
+    xmlns:sketch="clr-namespace:P5SharpSample.Animations.GameOfLife"
     Title="GameOfLife">
     <Grid>
 
@@ -16,11 +16,8 @@
             FilesCsv="Animations/GameOfLife/GameOfLifeSketch.cs,Animations/GameOfLife/Cell.cs"
             FrameRate="60"
             HotReloadInDebug="False"
-            ReDrawOnSizeChanged="True">
-            <p5:P5SketchView.Sketch>
-                <sketches:GameOfLifeSketch />
-            </p5:P5SketchView.Sketch>
-        </p5:P5SketchView>
+            ReDrawOnSizeChanged="True"
+            Sketch="{sketch:GameOfLifeSketch}" />
 
         <Grid
             BackgroundColor="#66666666"

@@ -3,17 +3,14 @@
     x:Class="P5SharpSample.Views.MatrixPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mainSketch="clr-namespace:P5SharpSample.Animations.Matrix"
     xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
+    xmlns:sketch="clr-namespace:P5SharpSample.Animations.Matrix"
     Title="MatrixPage">
     <p5:P5SketchView
         EnableTouchEvents="False"
         FilesCsv="Animations/Matrix/MatrixSketch.cs"
         FrameRate="60"
         HotReloadInDebug="True"
-        ReDrawOnSizeChanged="True">
-        <p5:P5SketchView.Sketch>
-            <mainSketch:MatrixSketch />
-        </p5:P5SketchView.Sketch>
-    </p5:P5SketchView>
+        ReDrawOnSizeChanged="True"
+        Sketch="{sketch:MatrixSketch}" />
 </ContentPage>

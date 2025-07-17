@@ -8,7 +8,6 @@ using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 using System.Diagnostics;
 using System.Reflection;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace P5Sharp
 {
@@ -161,17 +160,17 @@ namespace P5Sharp
         }
 
 
-    
+
 
 
         private void InitializeSketchAndServer()
         {
 
-             
+
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                
+
 
                 try
                 {
@@ -214,23 +213,34 @@ namespace P5Sharp
 
             try
             {
-                if (_runSetup)
-                {
-                    _sketch?.OnSetup(canvas, info);
-                    _sketchActions = _sketch?.SketchActions;
-                    _runSetup = false;
-                }
-
                 P5Variables memory = _sketch ?? new P5Variables();
                 memory._canvas = canvas;
                 memory._info = info;
 
-                _sketch?.OnDraw(memory);
+
+                if (!_runSetup)
+                {
+                    _sketch?.OnDraw(memory);
+                    return;
+                }
+                else
+                {
+                    _sketch?.OnSetup(canvas, info);
+                    _sketch?.clear();
+                    _sketchActions = _sketch?.SketchActions;
+                    _runSetup = false;
+                }
+
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error during drawing: {ex}");
             }
+
+
+
+
+
         }
 
 
@@ -354,10 +364,14 @@ namespace P5Sharp
             });
         }
 
+
         private void StopLoop()
         {
             _isRunning = false;
             _client?.Pause();
+
+            _runSetup = true;
+            _canvasView.InvalidateSurface();
         }
     }
 }

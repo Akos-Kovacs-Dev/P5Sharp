@@ -175,6 +175,10 @@ namespace P5Sharp
 
         /// <summary>Sets the background using a specified <see cref="SKColor"/> value.</summary>
         public void Background(SKColor color) => _canvas.Clear(color);
+        /// <summary>Clear canvas.</summary>
+        public void Clear() => _canvas.Clear();
+        /// <summary>Clear canvas.</summary>
+        public void clear() => Clear();
 
         #endregion
 

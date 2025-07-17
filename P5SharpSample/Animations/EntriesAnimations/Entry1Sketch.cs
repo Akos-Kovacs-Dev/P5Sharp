@@ -28,17 +28,17 @@ namespace P5SharpSample.Animations.EntriesAnimations
         protected override void Draw()
         {
             Background(255, 55, 50, 255);
-            frameCount++;
-            NoStroke();
-            if(frameCount % 15 != 0)
-            {
-                rect(5, 5, 2, Height - 10);
-
-            }
-            else
-            {
-                frameCount = 0;
-            }
+         // frameCount++;
+         // NoStroke();
+         // if(frameCount % 15 != 0)
+         // {
+         //     rect(5, 5, 2, Height - 10);
+         //
+         // }
+         // else
+         // {
+         //     frameCount = 0;
+         // }
 
 
             if (text is null)

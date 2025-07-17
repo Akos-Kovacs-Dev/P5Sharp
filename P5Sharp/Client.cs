@@ -28,6 +28,7 @@ namespace P5Sharp
             private Task _listeningTask;
             private List<string> _watchedFiles;
             private TcpClient _tcpClient;
+            private bool _isListening;
 
             public Client(string serverIp, int serverPort)
             {
@@ -40,11 +41,16 @@ namespace P5Sharp
                 _watchedFiles = files;
                 _callback = callback;
 
-                 
+                await StartListeningAsync();
             }
 
             private async Task StartListeningAsync()
             {
+                if (_isListening)
+                    return;
+
+                _isListening = true;
+
                 try
                 {
                     _cts = new CancellationTokenSource();
@@ -107,18 +113,27 @@ namespace P5Sharp
 
             public void Pause()
             {
+                if (!_isListening)
+                    return;
+
                 Console.WriteLine("Pausing TCP listener...");
                 _cts?.Cancel();
+                _isListening = false; // ✅ Add this line
             }
+
 
             public void ResumeAsync()
             {
+                if (_isListening)
+                    return;
+
                 Console.WriteLine("Resuming TCP listener...");
                 _= StartListeningAsync();
             }
 
             private void CleanupConnection()
             {
+                _isListening = false;
                 try
                 {
                     _tcpClient?.Close();
