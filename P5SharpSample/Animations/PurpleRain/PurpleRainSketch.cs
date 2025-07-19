@@ -37,7 +37,11 @@ namespace P5SharpSample.Animations.PurpleRain
                 y = Random(Height * -3, -20);
                 speed = map(z, 0, 20, 4, 10);
             }
+           
         }
+
+        
+
     }
     //Ref: https://thecodingtrain.com/challenges/4-purple-rain
     public class PurpleRainSketch : SketchBase

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P5SharpSample.Views.TetrisPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:p5="clr-namespace:P5Sharp;assembly=P5Sharp"
+    xmlns:sketch="clr-namespace:P5SharpSample.Animations.Tetris"
+    Title="TetrisPage">
+    <p5:P5SketchView
+        EnableTouchEvents="True"
+        FilesCsv="Animations/Tetris/TetrisSketch.cs"
+        FrameRate="2"
+        HotReloadInDebug="True"
+        ReDrawOnSizeChanged="True"
+        Sketch="{sketch:TetrisSketch}" />
+</ContentPage>

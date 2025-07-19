@@ -1,16 +1,17 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using P5Sharp;
 using P5SharpSample.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
- 
+
 namespace P5SharpSample.ViewModels
 {
     public partial class ButtonsPageViewModel(IMockAPIService mockAPIService) : BaseViewModel
     {
+
+
+        [ObservableProperty]
+        public bool _mockAPICallSuccess;
 
         private P5SketchView? _button4Sketch;
         public P5SketchView Button4Sketch
@@ -31,22 +32,34 @@ namespace P5SharpSample.ViewModels
         [RelayCommand]
         public async Task Button1()
         {
-            await App.Current.MainPage.DisplayAlert("Alert","Button1","Ok");
+            await App.Current.MainPage.DisplayAlert("Alert", "Button1", "Ok");
         }
 
+
+        bool success = false;
 
         [RelayCommand]
         public async Task Button4()
         {
             var result = await _mockAPIService.GetDataAsync();
 
+            success = !success;
             await App.Current.MainPage.DisplayAlert("API call completed", $"Results {string.Join(", ", result)}", "ok");
 
-            Button4Sketch.InvokeSketchAction("LoadCompleted", "");
-            //Button4Sketch.InvokeSketchAction("LoadFailed", "");
+
+            if (success)
+            {
+                Button4Sketch.InvokeSketchAction("LoadCompleted", "");
+
+            }
+            else
+            {
+                Button4Sketch.InvokeSketchAction("LoadFailed", "");
+            }
 
 
-          
+
+
 
         }
 

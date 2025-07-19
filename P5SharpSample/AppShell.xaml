@@ -51,6 +51,9 @@
         Route="EntriesPage" />
 
 
-
+    <ShellContent
+        Title="Tetris"
+        ContentTemplate="{DataTemplate views:TetrisPage}"
+        Route="TetrisPage" />
 
 </Shell>

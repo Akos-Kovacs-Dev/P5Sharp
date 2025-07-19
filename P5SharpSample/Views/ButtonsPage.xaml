@@ -7,52 +7,59 @@
     xmlns:sketch="clr-namespace:P5SharpSample.Animations.ButtonAnimations"
     xmlns:vm="clr-namespace:P5SharpSample.ViewModels"
     Title="Buttons">
-    <VerticalStackLayout
-        x:DataType="vm:ButtonsPageViewModel"
-        Spacing="20"
-        VerticalOptions="Center">
-        <p5:P5SketchView
-            EnableTouchEvents="True"
-            FilesCsv="Animations/ButtonAnimations/Button1Sketch.cs"
-            FrameRate="60"
-            HeightRequest="100"
-            HotReloadInDebug="True"
-            ReDrawOnSizeChanged="True"
-            Sketch="{sketch:Button1Sketch}"
-            SketchCommand="{Binding Button1Command}"
-            WidthRequest="200" />
 
-        <p5:P5SketchView
-            EnableTouchEvents="True"
-            FilesCsv="Animations/ButtonAnimations/Button2Sketch.cs"
-            FrameRate="60"
-            HeightRequest="100"
-            HotReloadInDebug="True"
-            ReDrawOnSizeChanged="True"
-            Sketch="{sketch:Button2Sketch}"
-            WidthRequest="200" />
+    <ScrollView>
+        <VerticalStackLayout
+            x:DataType="vm:ButtonsPageViewModel"
+            Spacing="20"
+            VerticalOptions="Center">
+            <p5:P5SketchView
+                EnableTouchEvents="True"
+                FilesCsv="Animations/ButtonAnimations/Button1Sketch.cs"
+                FrameRate="60"
+                HeightRequest="100"
+                HotReloadInDebug="True"
+                ReDrawOnSizeChanged="True"
+                Sketch="{sketch:Button1Sketch}"
+                SketchCommand="{Binding Button1Command}"
+                WidthRequest="200" />
 
-        <p5:P5SketchView
-            EnableTouchEvents="True"
-            FilesCsv="Animations/ButtonAnimations/Button3Sketch.cs"
-            FrameRate="60"
-            HeightRequest="100"
-            HotReloadInDebug="True"
-            ReDrawOnSizeChanged="True"
-            Sketch="{sketch:Button3Sketch}"
-            WidthRequest="200" />
+            <p5:P5SketchView
+                EnableTouchEvents="True"
+                FilesCsv="Animations/ButtonAnimations/Button2Sketch.cs"
+                FrameRate="60"
+                HeightRequest="100"
+                HotReloadInDebug="True"
+                ReDrawOnSizeChanged="True"
+                Sketch="{sketch:Button2Sketch}"
+                WidthRequest="200" />
 
-        <p5:P5SketchView
-            x:Name="Button4Sketch"
-            BackgroundColor="Transparent"
-            EnableTouchEvents="True"
-            FilesCsv="Animations/ButtonAnimations/Button4Sketch.cs"
-            FrameRate="60"
-            HeightRequest="60"
-            HotReloadInDebug="True"
-            ReDrawOnSizeChanged="True"
-            Sketch="{sketch:Button4Sketch}"
-            SketchCommand="{Binding Button4Command}"
-            WidthRequest="200" />
-    </VerticalStackLayout>
+            <p5:P5SketchView
+                EnableTouchEvents="True"
+                FilesCsv="Animations/ButtonAnimations/Button3Sketch.cs"
+                FrameRate="60"
+                HeightRequest="100"
+                HotReloadInDebug="True"
+                ReDrawOnSizeChanged="True"
+                Sketch="{sketch:Button3Sketch}"
+                WidthRequest="200" />
+
+            <p5:P5SketchView
+                x:Name="Button4Sketch"
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                EnableTouchEvents="True"
+                FilesCsv="Animations/ButtonAnimations/Button4Sketch.cs"
+                FrameRate="60"
+                HeightRequest="60"
+                HotReloadInDebug="True"
+                ReDrawOnSizeChanged="False"
+                Sketch="{sketch:Button4Sketch}"
+                SketchCommand="{Binding Button4Command}"
+                WidthRequest="200" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
