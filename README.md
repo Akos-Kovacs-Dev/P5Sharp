@@ -54,9 +54,8 @@ For a faster development experience on **Windows**, you can skip the Visual Stud
 ```csharp
 builder.UseP5Sharp(new P5SharpConfig
 {
-    LocalTPCServer = true,
-    ProjectPath = @"C:\Path\To\Your\Project",  // Same folder where your `.csproj` lives
-    IP = "127.0.0.1",
+    LocalTPCServer = true,    
+    IP = "xxx.xxx.x.x", //your ip
     Port = 1234                                // Use any available port
 });
 ```
