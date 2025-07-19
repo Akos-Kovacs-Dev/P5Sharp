@@ -76,6 +76,46 @@ This is your sketch entry point, like `setup()` and `draw()` in p5.js.
 
 ---
 
+## ✏️ Creating a P5Object
+
+In Visual Studio:  
+- Right-click your project  
+- Select **Add → New File → P5Object**  
+
+This generates a new class that inherits from `P5Object`.
+
+P5Objects are reusable, modular components that can encapsulate their own logic (similar to objects in p5.js). You can define `Setup`, `Draw`, `OnTouch`, and other overrides in each P5Object.
+
+---
+
+### 🧠 Using P5Objects in your Sketch
+
+In your main sketch class (which inherits from `SketchBase`), you can include and draw your P5Object like this:
+
+```csharp
+public class YourSketch : SketchBase
+{
+    MyP5Object obj;
+
+    public override void Setup()
+    {
+        obj = new MyP5Object();
+        obj.Setup();
+    }
+
+    public override void Draw()
+    {
+        obj.OnDraw(this); // Pass the SketchBase context (which has canvas, width, height, etc.)
+    }
+}
+```
+
+> 🔄 The `OnDraw(this)` call ensures your P5Object gets full access to the current canvas context and sketch environment.
+
+You can organize your sketch into multiple files and import them in your `P5SketchView` using either `FilesCsv` or `P5Objects`.
+
+---
+
 ## 🧩 Splitting Code with `P5Objects`
 
 You can break up your sketch into **multiple files** and classes.  
