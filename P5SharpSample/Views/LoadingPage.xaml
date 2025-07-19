@@ -9,7 +9,6 @@
     <VerticalStackLayout VerticalOptions="Center">
         <p5:P5SketchView
             EnableTouchEvents="True"
-            FilesCsv="Animations/LoadingAnimations/Load1Sketch.cs"
             FrameRate="60"
             HeightRequest="100"
             HotReloadInDebug="False"
@@ -18,7 +17,6 @@
             WidthRequest="200" />
 
         <p5:P5SketchView
-            FilesCsv="Animations/LoadingAnimations/Load2Sketch.cs"
             FrameRate="60"
             HeightRequest="100"
             HotReloadInDebug="False"
@@ -27,7 +25,6 @@
             WidthRequest="100" />
 
         <p5:P5SketchView
-            FilesCsv="Animations/LoadingAnimations/Load3Sketch.cs"
             FrameRate="15"
             HeightRequest="100"
             HotReloadInDebug="True"

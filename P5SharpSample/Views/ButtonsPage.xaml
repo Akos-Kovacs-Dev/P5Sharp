@@ -15,7 +15,6 @@
             VerticalOptions="Center">
             <p5:P5SketchView
                 EnableTouchEvents="True"
-                FilesCsv="Animations/ButtonAnimations/Button1Sketch.cs"
                 FrameRate="60"
                 HeightRequest="100"
                 HotReloadInDebug="True"
@@ -26,7 +25,6 @@
 
             <p5:P5SketchView
                 EnableTouchEvents="True"
-                FilesCsv="Animations/ButtonAnimations/Button2Sketch.cs"
                 FrameRate="60"
                 HeightRequest="100"
                 HotReloadInDebug="True"
@@ -36,7 +34,6 @@
 
             <p5:P5SketchView
                 EnableTouchEvents="True"
-                FilesCsv="Animations/ButtonAnimations/Button3Sketch.cs"
                 FrameRate="60"
                 HeightRequest="100"
                 HotReloadInDebug="True"
@@ -50,7 +47,6 @@
                 Grid.Column="1"
                 BackgroundColor="Transparent"
                 EnableTouchEvents="True"
-                FilesCsv="Animations/ButtonAnimations/Button4Sketch.cs"
                 FrameRate="60"
                 HeightRequest="60"
                 HotReloadInDebug="True"

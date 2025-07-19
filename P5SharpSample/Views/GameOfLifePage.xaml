@@ -13,9 +13,9 @@
         <p5:P5SketchView
             x:Name="GameOfLifeP5View"
             EnableTouchEvents="True"
-            FilesCsv="Animations/GameOfLife/GameOfLifeSketch.cs,Animations/GameOfLife/Cell.cs"
             FrameRate="60"
-            HotReloadInDebug="False"
+            HotReloadInDebug="True"
+            P5Objects="Animations/GameOfLife/Cell.cs"
             ReDrawOnSizeChanged="True"
             Sketch="{sketch:GameOfLifeSketch}" />
 

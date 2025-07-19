@@ -157,7 +157,7 @@ namespace P5SharpSync
                             newClientFilesToWatch.Remove(file);
 
                         StartWatchingFiles(client, newClientFilesToWatch);
-                        OnFileChanged("Initial load.");
+                        //OnFileChanged("Initial load."); //wont be needed
 
                     }
                     catch (Exception ex)

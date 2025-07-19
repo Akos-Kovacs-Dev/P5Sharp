@@ -10,7 +10,6 @@
     <Grid>
         <p5:P5SketchView
             EnableTouchEvents="True"
-            FilesCsv="Animations/BackgroundAnimations/LoginPageBackgroundSketch.cs"
             FrameRate="60"
             HotReloadInDebug="true"
             ReDrawOnSizeChanged="True"

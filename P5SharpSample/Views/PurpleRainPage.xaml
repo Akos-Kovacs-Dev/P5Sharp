@@ -10,7 +10,6 @@
     <p5:P5SketchView
         x:Name="GameOfLifeP5View"
         EnableTouchEvents="True"
-        FilesCsv="Animations/PurpleRain/PurpleRainSketch.cs"
         FrameRate="60"
         HotReloadInDebug="True"
         ReDrawOnSizeChanged="True"

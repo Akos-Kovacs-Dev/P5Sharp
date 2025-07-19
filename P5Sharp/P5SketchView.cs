@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using P5Sharp.P5Sharp;
+
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
@@ -22,13 +22,13 @@ namespace P5Sharp
         private SketchBase _sketch;
         private Dictionary<string, Action<string>> _sketchActions = new();
         private Client _client;
-        
+
 
         private bool _runSetup = true;
         private bool _isRunning = false;
 
         private int _frameRate = 60;
-        
+
         private List<string> _files = new();
         private bool _hotReloadInDebug = true;
         private bool _reDrawOnSizeChanged = true;
@@ -59,8 +59,8 @@ namespace P5Sharp
         public static readonly BindableProperty FilesProperty =
             BindableProperty.Create(nameof(Files), typeof(List<string>), typeof(P5SketchView), new List<string>());
 
-        public static readonly BindableProperty FilesCsvProperty =
-            BindableProperty.Create(nameof(FilesCsv), typeof(string), typeof(P5SketchView), "", propertyChanged: OnFilesCsvChanged);
+        public static readonly BindableProperty P5ObjectsProperty =
+            BindableProperty.Create(nameof(P5Objects), typeof(string), typeof(P5SketchView), "", propertyChanged: OnFilesCsvChanged);
 
         public static readonly BindableProperty SketchProperty =
             BindableProperty.Create(nameof(Sketch), typeof(SketchBase), typeof(P5SketchView), null, propertyChanged: OnSketchChanged);
@@ -77,9 +77,9 @@ namespace P5Sharp
         public static readonly BindableProperty ReDrawOnSizeChangedProperty =
             BindableProperty.Create(nameof(ReDrawOnSizeChanged), typeof(bool), typeof(P5SketchView), true);
 
-        public static readonly BindableProperty SketchCommandProperty = 
-            BindableProperty.Create(nameof(SketchCommand),typeof(ICommand),typeof(P5SketchView),default(ICommand), propertyChanged: OnSketchChanged);
-        
+        public static readonly BindableProperty SketchCommandProperty =
+            BindableProperty.Create(nameof(SketchCommand), typeof(ICommand), typeof(P5SketchView), default(ICommand), propertyChanged: OnSketchChanged);
+
 
         #endregion
 
@@ -91,10 +91,10 @@ namespace P5Sharp
             set => SetValue(FilesProperty, value);
         }
 
-        public string FilesCsv
+        public string P5Objects
         {
-            get => (string)GetValue(FilesCsvProperty);
-            set => SetValue(FilesCsvProperty, value);
+            get => (string)GetValue(P5ObjectsProperty);
+            set => SetValue(P5ObjectsProperty, value);
         }
 
         public SketchBase Sketch
@@ -139,8 +139,32 @@ namespace P5Sharp
         private static void OnSketchChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is P5SketchView view && newValue is SketchBase sketch)
+            {
+                //  Automatically add the sketch's file to Files if needed
+                string inferredPath = view.InferSketchFilePath(sketch);
+                if (!view.Files.Contains(inferredPath))
+                    view.Files.Insert(0, inferredPath); // <-- put the main sketch file first
+
+
                 view.InitializeInternal(sketch);
+            }
+
         }
+        private string InferSketchFilePath(SketchBase sketch)
+        {
+            var type = sketch.GetType();
+            var fullPath = type.FullName;
+            var index = fullPath.IndexOf('.');
+            if (index >= 0)
+            {
+                fullPath = fullPath.Substring(index + 1);
+            }
+            fullPath = fullPath.Replace(".", "/");
+            return $"{fullPath}.cs";
+        }
+
+
+
 
         private static void OnFilesCsvChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -148,9 +172,12 @@ namespace P5Sharp
             {
                 view.Files = csv
                     .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(path => path.Replace("\\", "/")) // ✅ No root namespace prepended
                     .ToList();
             }
         }
+
+
 
         #endregion
 
@@ -163,7 +190,7 @@ namespace P5Sharp
 
             _frameRate = FrameRate;
             _files = Files;
-            _hotReloadInDebug = HotReloadInDebug;            
+            _hotReloadInDebug = HotReloadInDebug;
             _reDrawOnSizeChanged = ReDrawOnSizeChanged;
             _sketchActions = sketch?.SketchActions;
 

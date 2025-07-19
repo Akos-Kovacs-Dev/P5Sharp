@@ -13,12 +13,12 @@ namespace P5SharpSample.Animations.GameOfLife
         int cellSize = 40;
         List<Cell> _cells;
 
-
-
         public GameOfLifeSketch()
         {
             SketchActions.Add("randomize", (inp) =>
             {
+
+
 
                 _cells = new List<Cell>();
                 for (int x = 0; x * cellSize + cellSize < Width; x++)

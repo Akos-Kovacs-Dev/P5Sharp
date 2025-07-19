@@ -8,7 +8,6 @@
     Title="MatrixPage">
     <p5:P5SketchView
         EnableTouchEvents="False"
-        FilesCsv="Animations/Matrix/MatrixSketch.cs"
         FrameRate="60"
         HotReloadInDebug="True"
         ReDrawOnSizeChanged="True"

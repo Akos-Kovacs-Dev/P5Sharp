@@ -8,7 +8,6 @@
     Title="TetrisPage">
     <p5:P5SketchView
         EnableTouchEvents="True"
-        FilesCsv="Animations/Tetris/TetrisSketch.cs"
         FrameRate="2"
         HotReloadInDebug="True"
         ReDrawOnSizeChanged="True"

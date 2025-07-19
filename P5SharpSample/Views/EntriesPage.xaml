@@ -14,7 +14,6 @@
         <p5:P5SketchView
             x:Name="Entry1"
             EnableTouchEvents="True"
-            FilesCsv="Animations/EntriesAnimations/Entry1Sketch.cs"
             FrameRate="60"
             HotReloadInDebug="True"
             InputTransparent="True"

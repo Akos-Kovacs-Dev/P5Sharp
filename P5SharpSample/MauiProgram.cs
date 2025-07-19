@@ -20,7 +20,7 @@ namespace P5SharpSample
                 {
                     IP = "192.168.0.7",
                     Port = 12345,                    
-                    LocalTPCServer = true,
+                   // LocalTPCServer = true,
                 })
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
